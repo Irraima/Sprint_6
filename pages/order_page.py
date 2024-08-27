@@ -1,4 +1,4 @@
-from data import Data
+from data import Login
 from pages.base_page import BasePage
 from locators.order_page_locators import OrderPageLocators
 from selenium.webdriver.common.by import By
@@ -19,27 +19,27 @@ class OrderPage(BasePage):
 
     @staticmethod
     def input_name(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_NAME).send_keys(Data.NAME)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_NAME).send_keys(Login.NAME)
 
     @staticmethod
     def input_alt_name(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_NAME).send_keys(Data.ALT_NAME)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_NAME).send_keys(Login.ALT_NAME)
 
     @staticmethod
     def input_surname(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_SURNAME).send_keys(Data.SURNAME)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_SURNAME).send_keys(Login.SURNAME)
 
     @staticmethod
     def input_alt_surname(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_SURNAME).send_keys(Data.ALT_SURNAME)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_SURNAME).send_keys(Login.ALT_SURNAME)
 
     @staticmethod
     def input_address(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_ADDRESS).send_keys(Data.ADDRESS)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_ADDRESS).send_keys(Login.ADDRESS)
 
     @staticmethod
     def input_alt_address(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_ADDRESS).send_keys(Data.ALT_ADDRESS)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_ADDRESS).send_keys(Login.ALT_ADDRESS)
 
     @staticmethod
     def open_select_metro_station(driver):
@@ -57,11 +57,11 @@ class OrderPage(BasePage):
 
     @staticmethod
     def input_phone_number(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_PHONE_NUMBER).send_keys(Data.PHONE_NUMBER)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_PHONE_NUMBER).send_keys(Login.PHONE_NUMBER)
 
     @staticmethod
     def input_alt_phone_number(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_PHONE_NUMBER).send_keys(Data.ALT_PHONE_NUMBER)
+        driver.find_element(By.XPATH, OrderPageLocators.INPUT_PHONE_NUMBER).send_keys(Login.ALT_PHONE_NUMBER)
 
     @staticmethod
     def click_next_button(driver):

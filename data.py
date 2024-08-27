@@ -1,7 +1,9 @@
-class Data:
+class URL:
     URL = "https://qa-scooter.praktikum-services.ru/"
     URL_YANDEX = "https://dzen.ru/?yredirect=true"
 
+
+class Login:
     NAME = "Наруто"
     ALT_NAME = "Саске"
 

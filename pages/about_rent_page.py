@@ -1,4 +1,4 @@
-from data import Data
+from data import Login
 from pages.base_page import BasePage
 from locators.about_rent_locators import AboutRentLocators
 from selenium.webdriver.common.by import By
@@ -11,11 +11,11 @@ class AboutRentPage(BasePage):
 
     @staticmethod
     def input_date(driver):
-        driver.find_element(By.XPATH, AboutRentLocators.DATE).send_keys(Data.DATE)
+        driver.find_element(By.XPATH, AboutRentLocators.DATE).send_keys(Login.DATE)
 
     @staticmethod
     def input_alt_date(driver):
-        driver.find_element(By.XPATH, AboutRentLocators.DATE).send_keys(Data.ALT_DATE)
+        driver.find_element(By.XPATH, AboutRentLocators.DATE).send_keys(Login.ALT_DATE)
 
     @staticmethod
     def open_rent_time(driver):

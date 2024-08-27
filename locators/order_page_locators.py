@@ -1,7 +1,7 @@
 class OrderPageLocators:
 
-    LOGO_YANDEX = ".//a[@class = 'Header_LogoYandex__3TSOI']"
-    LOGO_SCOOTER = ".//a[@class = 'Header_LogoScooter__3lsAR']"
+    LOGO_YANDEX = ".//a[contains(@class, 'Header_LogoYandex')]"
+    LOGO_SCOOTER = ".//a[contains(@class, 'Header_LogoScooter')]"
 
     INPUT_NAME = ".//input[@placeholder='* Имя']"
 
@@ -13,7 +13,7 @@ class OrderPageLocators:
 
     INPUT_PHONE_NUMBER = ".//input[@placeholder='* Телефон: на него позвонит курьер']"
 
-    NEXT_BUTTON = ".//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM']"
+    NEXT_BUTTON = ".//button[contains(@class, 'Button_Middle')]"
 
     TITLE_ORDER_PAGE = ".//div[@text() = 'Для кого самокат']"
 

@@ -1,9 +1,9 @@
 class BasePageLocators:
-    TOP_PAGE_ORDER_BUTTON = ".//button[@class = 'Button_Button__ra12g']"
+    TOP_PAGE_ORDER_BUTTON = "//*[@id='root']/div/div/div[1]/div[2]/button[1]"
     BOTTOM_PAGE_ORDER_BUTTON = "//*[@id='root']/div/div/div[4]/div[2]/div[5]/button"
 
-    LOGO_YANDEX = ".//a[@class = 'Header_LogoYandex__3TSOI']"
-    LOGO_SCOOTER = ".//a[@class = 'Header_LogoYandex__3TSOI']"
+    LOGO_YANDEX = ".//a[contains(@class, 'Header_LogoYandex')]/img[@alt = 'Scooter']"
+    LOGO_SCOOTER = ".//a[contains(@class, 'Header_LogoYandex')]/img[@alt = 'Yandex']"
 
     ABOUT_THE_IMPORTANT = ".//div[text() = 'Вопросы о важном']"
 

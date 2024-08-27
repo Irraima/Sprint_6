@@ -1,12 +1,12 @@
 import pytest
 from selenium import webdriver
-from data import Data
+from data import URL
 
 
 @pytest.fixture(scope='function')
 def driver():
     chrome_driver = webdriver.Chrome()
-    chrome_driver.get(Data.URL)
+    chrome_driver.get(URL.URL)
     chrome_driver.maximize_window()
 
     yield chrome_driver

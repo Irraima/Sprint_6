@@ -1,35 +1,43 @@
-from locators.base_page_locators import BasePageLocators
-from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage:
-
     def __init__(self, driver):
         self.driver = driver
 
-    @staticmethod
-    def scroll_by_about_the_important(driver):
-        element = driver.find_element(By.XPATH, BasePageLocators.ABOUT_THE_IMPORTANT)
-        driver.execute_script("arguments[0].scrollIntoView();", element)
+    def find_element_with_wait(self, locator):
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator))
+        return self.driver.find_element(*locator)
+
+    def click_on_element(self, locator):
+        WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable(locator))
+        self.driver.find_element(*locator).click()
 
     @staticmethod
-    def click_top_page_order_button(driver):
-        driver.find_element(By.XPATH, BasePageLocators.TOP_PAGE_ORDER_BUTTON).click()
+    def get_text_from_element(element):
+        return element.text
 
-    @staticmethod
-    def scroll_by_bottom_page_order_button(driver):
-        element = driver.find_element(By.XPATH, BasePageLocators.BOTTOM_PAGE_ORDER_BUTTON)
-        driver.execute_script("arguments[0].scrollIntoView();", element)
+    def set_text_to_form(self, locator, text):
+        WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable(locator))
+        self.driver.find_element(*locator).send_keys(text)
 
-    @staticmethod
-    def click_bottom_page_order_button(driver):
-        driver.find_element(By.XPATH, BasePageLocators.BOTTOM_PAGE_ORDER_BUTTON).click()
+    def scroll_to_bottom_page(self):
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-    @staticmethod
-    def click_logo_yandex(driver):
-        driver.find_element(By.XPATH, BasePageLocators.LOGO_YANDEX).click()
+    def scroll_to_element(self, locator):
+        element = self.driver.find_element(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    @staticmethod
-    def click_logo_scooter(driver):
-        driver.find_element(By.XPATH, BasePageLocators.LOGO_SCOOTER).click()
-    
+    def scroll_and_click_with_wait(self, locator):
+        self.driver.execute_script('arguments[0].scrollIntoView();', self.driver.find_element(*locator))
+        self.click_on_element(locator)
+
+    def get_current_url(self):
+        current_url = self.driver.current_url
+        return current_url
+
+    def switch_pages(self):
+        WebDriverWait(self.driver, 10).until(expected_conditions.number_of_windows_to_be(2))
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        WebDriverWait(self.driver, 10).until(expected_conditions.url_contains('https://dzen.ru/'))

@@ -1,14 +1,15 @@
 import pytest
 from selenium import webdriver
-from data import URL
+
+import links
 
 
 @pytest.fixture(scope='function')
 def driver():
-    chrome_driver = webdriver.Chrome()
-    chrome_driver.get(URL.URL)
-    chrome_driver.maximize_window()
 
-    yield chrome_driver
-
-    chrome_driver.quit()
+    firefox_options = webdriver.FirefoxOptions()
+    driver = webdriver.Firefox(options=firefox_options)
+    driver.maximize_window()
+    driver.get(links.main_page)
+    yield driver
+    driver.quit()

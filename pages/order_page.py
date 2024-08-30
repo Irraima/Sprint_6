@@ -1,72 +1,54 @@
-from data import Login
-from pages.base_page import BasePage
 from locators.order_page_locators import OrderPageLocators
-from selenium.webdriver.common.by import By
+from pages.base_page import BasePage
 
 
 class OrderPage(BasePage):
 
-    def __init__(self, driver):
-        super().__init__(driver)
+    def fill_name_filed(self, name):
+        self.set_text_to_form(OrderPageLocators.NAME_FIELD, name)
 
-    @staticmethod
-    def click_logo_yandex(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.LOGO_YANDEX).click()
+    def find_name_field(self):
+        self.find_element_with_wait(OrderPageLocators.NAME_FIELD)
 
-    @staticmethod
-    def click_logo_scooter(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.LOGO_SCOOTER).click()
+    def fill_last_name_field(self, last_name):
+        self.set_text_to_form(OrderPageLocators.LAST_FIELD, last_name)
 
-    @staticmethod
-    def input_name(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_NAME).send_keys(Login.NAME)
+    def fill_address_field(self, address):
+        self.set_text_to_form(OrderPageLocators.ADDRESS_FIELD, address)
 
-    @staticmethod
-    def input_alt_name(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_NAME).send_keys(Login.ALT_NAME)
+    def set_metro_field(self, metro):
+        self.click_on_element(OrderPageLocators.METRO_FIELD)
+        method, locator = OrderPageLocators.METRO_STATION
+        locator = locator.format(metro)
+        self.scroll_and_click_with_wait((method, locator))
 
-    @staticmethod
-    def input_surname(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_SURNAME).send_keys(Login.SURNAME)
+    def fill_phone_field(self, phone_number):
+        self.set_text_to_form(OrderPageLocators.PHONE_FIELD, phone_number)
 
-    @staticmethod
-    def input_alt_surname(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_SURNAME).send_keys(Login.ALT_SURNAME)
+    def set_date_or_duration(self, field_locator, value_locator):
+        self.click_on_element(field_locator)
+        self.click_on_element(value_locator)
 
-    @staticmethod
-    def input_address(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_ADDRESS).send_keys(Login.ADDRESS)
+    def choose_scooter_color(self, locator, color):
+        method, locator = locator
+        locator = locator.format(color)
+        self.click_on_element((method, locator))
 
-    @staticmethod
-    def input_alt_address(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_ADDRESS).send_keys(Login.ALT_ADDRESS)
+    def fill_user_data_form(self, name, last_name, address, metro, phone_number):
+        self.fill_name_filed(name)
+        self.fill_last_name_field(last_name)
+        self.fill_address_field(address)
+        self.set_metro_field(metro)
+        self.fill_phone_field(phone_number)
+        self.click_on_element(OrderPageLocators.NEXT_BUTTON)
 
-    @staticmethod
-    def open_select_metro_station(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.OPEN_SELECT_METRO_STATION).click()
+    def set_order_details_and_confirm(self, scooter_color):
+        self.set_date_or_duration(OrderPageLocators.DATE_FIELD, OrderPageLocators.CHOOSE_DATE)
+        self.set_date_or_duration(OrderPageLocators.DURATION_FIELD, OrderPageLocators.DURATION_RENT)
+        self.choose_scooter_color(OrderPageLocators.SCOOTER_COLOR, scooter_color)
+        self.click_on_element(OrderPageLocators.ORDER_BUTTON)
+        self.click_on_element(OrderPageLocators.CONFIRM_BUTTON)
 
-    @staticmethod
-    def select_metro(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.OPEN_SELECT_METRO_STATION).click()
-        driver.find_element(By.XPATH, f"//button[starts-with(@class, 'Order_SelectOption')]/div[text()='Бульвар Рокоссовского']").click()
-
-    @staticmethod
-    def select_alt_metro(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.OPEN_SELECT_METRO_STATION).click()
-        driver.find_element(By.XPATH, f"//button[starts-with(@class, 'Order_SelectOption')]/div[text()='Комсомольская']").click()
-
-    @staticmethod
-    def input_phone_number(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_PHONE_NUMBER).send_keys(Login.PHONE_NUMBER)
-
-    @staticmethod
-    def input_alt_phone_number(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.INPUT_PHONE_NUMBER).send_keys(Login.ALT_PHONE_NUMBER)
-
-    @staticmethod
-    def click_next_button(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.NEXT_BUTTON).click()
-
-    @staticmethod
-    def click_title(driver):
-        driver.find_element(By.XPATH, OrderPageLocators.TITLE_ORDER_PAGE).click()
+    def get_text_from_popup(self):
+        element = self.find_element_with_wait(OrderPageLocators.ORDER_COMPLETE)
+        return self.get_text_from_element(element)
